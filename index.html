@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskCraft AI - Asisten Tugas & Konten Digital</title>
+    <style>
+        /* CSS RESET & VARIABLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* HEADER & NAVBAR */
+        header {
+            background: #ffffff;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 4rem 5% 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        /* AI TOOL INTERACTIVE SECTION */
+        .tool-container {
+            max-width: 700px;
+            margin: 2rem auto;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* RESULT BOX */
+        .result-box {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #eef2ff;
+            border-left: 4px solid var(--primary);
+            border-radius: 4px;
+            display: none;
+            text-align: left;
+        }
+
+        /* PRICING SECTION */
+        .pricing-section {
+            padding: 3rem 5%;
+            text-align: center;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1rem));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 2rem auto 0;
+        }
+        .price-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .price-card.featured {
+            border: 2px solid var(--primary);
+        }
+        .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #0f172a;
+            color: white;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="logo">⚡ TaskCraft AI</div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h1>Bikin Draf Tugas & Konten Promosi Dikit Klik, Kelar!</h1>
+        <p>Bantu susun outline tugas sekolah, ide postingan usaha, atau caption jualan secara otomatis dengan teknologi AI.</p>
+    </section>
+
+    <!-- INTERACTIVE AI DEMO -->
+    <main>
+        <section class="tool-container">
+            <h2>Coba Generasi Draf Gratis</h2>
+            <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 1.5rem;">Masukkan topik tugas atau produk yang ingin kamu buatkan rangkumannya.</p>
+
+            <div class="form-group">
+                <label for="taskType">Jenis Kebutuhan:</label>
+                <select id="taskType">
+                    <option value="essay">Outline Essay / Makalah</option>
+                    <option value="caption">Caption Promosi Jualan</option>
+                    <option value="ide">Ide Konten Media Sosial</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="userPrompt">Topik / Nama Produk:</label>
+                <input type="text" id="userPrompt" placeholder="Contoh: Bahaya Sampah Plastik / Keripik Pedas">
+            </div>
+
+            <button class="btn-primary" onclick="generateAI()">Proses Draf Sekarang</button>
+
+            <!-- KOTAK HASIL -->
+            <div id="resultBox" class="result-box">
+                <strong>Hasil Generasi AI:</strong>
+                <p id="resultContent" style="margin-top: 0.5rem;"></p>
+            </div>
+        </section>
+
+        <!-- PRICING / MONETISASI -->
+        <section class="pricing-section">
+            <h2>Pilih Layanan Kami</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>Versi Gratis</h3>
+                    <div class="price">Rp 0</div>
+                    <p>✓ Generator draf teks dasar</p>
+                    <p>✓ Format teks standar</p>
+                </div>
+                <div class="price-card featured">
+                    <h3>Versi Pro + Jasa Desain</h3>
+                    <div class="price">Rp 15.000</div>
+                    <p>✓ Draf lengkap & diketik rapi</p>
+                    <p>✓ Bonus desain PPT/Poster Canva</p>
+                    <p>✓ Pengerjaan cepat < 24 jam</p>
+                    <br>
+                    <button class="btn-primary" onclick="orderServices()">Pesan Versi Pro</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 TaskCraft AI - Proyek Prototipe Wirausaha TIK SMK/SMA</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        function generateAI() {
+            const type = document.getElementById('taskType').value;
+            const prompt = document.getElementById('userPrompt').value;
+            const resultBox = document.getElementById('resultBox');
+            const resultContent = document.getElementById('resultContent');
+
+            if (!prompt.trim()) {
+                alert('Tolong masukkan topik atau nama produk terlebih dahulu!');
+                return;
+            }
+
+            resultBox.style.display = 'block';
+            resultContent.innerText = "Sedang memproses draf AI...";
+
+            // Simulasi AI delay & logic sederhana
+            setTimeout(() => {
+                if (type === 'essay') {
+                    resultContent.innerText = `[DRAF ESSAY: ${prompt}]\n\n1. Pendahuluan: Latar belakang pentingnya ${prompt}.\n2. Pembahasan: Dampak utama dan analisis kasus terkait ${prompt}.\n3. Kesimpulan: Solusi dan saran tindak lanjut.`;
+                } else if (type === 'caption') {
+                    resultContent.innerText = `[CAPTION PROMOSI]\n\nBingung cari ${prompt} yang berkualitas? 🚀\nTenang! Kami hadir memberikan solusi terbaik untuk kamu. Dapatkan diskon khusus minggu ini!\n\n👉 Hubungi kami sekarang via link di bio! #UsahaLokal #${prompt.replace(/\s+/g, '')}`;
+                } else {
+                    resultContent.innerText = `[IDE KONTEN]\n\n1. Video Shorts: "3 Alasan kenapa kamu harus tahu ${prompt}"\n2. Carousel Instagram: Mitos vs Fakta tentang ${prompt}\n3. Q&A Story: Tanya jawab seputar ${prompt}.`;
+                }
+            }, 1000);
+        }
+
+        function orderServices() {
+            const phone = "6281234567890"; // Ganti dengan nomor WhatsApp usahamu
+            const text = encodeURIComponent("Halo Admin TaskCraft AI, saya tertarik pesan layanan Versi Pro + Desain!");
+            window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+        }
+    </script>
+</body>
+</html>
